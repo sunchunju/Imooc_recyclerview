@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.MyViewHolder> {
     private Context mContext;
-    private List<String> mDatas;
+    protected List<String> mDatas;
     private LayoutInflater mLayoutInflater;
 
     public SimpleAdapter(Context context, List<String> datas){
@@ -53,7 +53,12 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.MyViewHold
     public void onBindViewHolder(final MyViewHolder viewHolder, final int i) {
         viewHolder.tv.setText(mDatas.get(i));
 //        final int pos = viewHolder.getLayoutPosition();
+        setupItemEvent(viewHolder);
 
+
+    }
+
+    protected void setupItemEvent(final MyViewHolder viewHolder) {
         //´¥·¢»Øµ÷
         if (mOnItemClickListener != null){
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +78,6 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.MyViewHold
                 }
             });
         }
-
     }
 
     @Override

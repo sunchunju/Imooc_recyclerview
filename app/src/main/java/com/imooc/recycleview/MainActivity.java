@@ -47,8 +47,8 @@ public class MainActivity extends Activity {
 
             @Override
             public void onItemLongClick(View view, int pos) {
-//                Toast.makeText(MainActivity.this, "Long Click : "+ pos, Toast.LENGTH_SHORT).show();
-                mSimpleAdapter.removeItem(pos);
+                Toast.makeText(MainActivity.this, "Long Click : "+ pos, Toast.LENGTH_SHORT).show();
+//                mSimpleAdapter.removeItem(pos);
             }
         });
     }

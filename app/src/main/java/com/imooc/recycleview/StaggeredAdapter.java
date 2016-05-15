@@ -14,16 +14,11 @@ import java.util.Random;
 /**
  * Created by SUN on 2016/5/15.
  */
-public class StaggeredAdapter extends RecyclerView.Adapter<StaggeredAdapter.MyViewHolder> {
-    private Context mContext;
-    private List<String> mDatas;
-    private LayoutInflater mLayoutInflater;
-    private List<Integer> mHeights;
+public class StaggeredAdapter extends SimpleAdapter {
+    protected List<Integer> mHeights;
 
     public StaggeredAdapter(Context context, List<String> datas){
-        mContext = context;
-        mDatas = datas;
-        mLayoutInflater = LayoutInflater.from(mContext);
+        super(context, datas);
         initItemHeights();
     }
 
@@ -34,15 +29,6 @@ public class StaggeredAdapter extends RecyclerView.Adapter<StaggeredAdapter.MyVi
         }
     }
 
-    /**
-     * layout init
-     * */
-    @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = mLayoutInflater.inflate(R.layout.item_view, viewGroup, false);
-        MyViewHolder myViewHolder = new MyViewHolder(view);
-        return myViewHolder;
-    }
 
     //数据的赋值
     @Override
@@ -53,29 +39,9 @@ public class StaggeredAdapter extends RecyclerView.Adapter<StaggeredAdapter.MyVi
         viewHolder.itemView.setLayoutParams(lp);
         viewHolder.tv.setText(mDatas.get(i));
 
+
+        setupItemEvent(viewHolder);
+
     }
 
-    @Override
-    public int getItemCount() {
-        return mDatas.size();
-    }
-
-    class MyViewHolder extends RecyclerView.ViewHolder{
-
-        TextView tv;
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            tv = (TextView) itemView.findViewById(R.id.id_tv_item);
-        }
-    }
-
-    public void addItem(int pos){
-        mDatas.add(pos, "Insert one");
-        notifyItemInserted(pos);
-    }
-
-    public void removeItem(int pos){
-        mDatas.remove(pos);
-        notifyItemRemoved(pos);
-    }
 }
